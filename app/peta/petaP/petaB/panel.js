@@ -18,7 +18,7 @@ window.initKalibrasiPanel = ({ $, panel, menuUtama, key }) => {
     node.classList.add(kelas);
   }
   function kembalikanDariBody(){
-    for(const data of elemenPin{
+    for(const data of elemenPin){
       data.node.classList.remove("panel-always-on-top","menu-always-on-top");
       if(data.parent.isConnected)data.parent.insertBefore(data.node,data.nextSibling?.parentNode===data.parent?data.nextSibling:null);
     }
