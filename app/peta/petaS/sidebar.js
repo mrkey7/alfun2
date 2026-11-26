@@ -265,6 +265,8 @@
     document.body.style.setProperty("--peta-s-width", `${petaS.width}px`);
     document.body.style.setProperty("--peta-p-left", `${petaP.left}px`);
     document.body.style.setProperty("--peta-p-width", `${petaP.width}px`);
+    document.body.style.setProperty("--peta-p-grid-width", `${petaG.width}px`);
+    document.body.style.setProperty("--peta-p-scale", String(scale));
     petakGlobal.update(Math.max(petaG.height,contentHeight)*scale,petaG.height*scale,peta);
   }
   function refresh() { contentHeight = measureContent(); updateScale(); }
