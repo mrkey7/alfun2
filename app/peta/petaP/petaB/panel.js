@@ -32,6 +32,7 @@ window.initKalibrasiPanel = ({ $, panel, menuUtama, key }) => {
     }
   }
   if(input){
+    input.checked=localStorage.getItem(key.hide)==="1";
     input.addEventListener("change",sinkronkanAlwaysOnTop);
     observerArea=new MutationObserver(sinkronkanAlwaysOnTop);
     observerArea.observe(document.body,{childList:true,subtree:true});
