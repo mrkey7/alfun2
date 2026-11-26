@@ -277,10 +277,3 @@
 }
 
 
-/* Always on Top: prioritas panel dapat diubah melalui ceklist. */
-#alfiyyahPanelArea[data-always-on-top="true"] { z-index: 2147483646; }
-#alfiyyahPanelArea[data-always-on-top="false"] { z-index: 1; }
-
-
-/* Ceklist Always on Top: status diatur langsung dari panel.js. */
-#alfiyyahPanelArea .opsi-always-on-top { cursor:pointer; }
