@@ -11,16 +11,8 @@ window.initKalibrasiPanel = ({ $, panel, menuUtama, key }) => {
     if(!node)return;
     let data=elemenPin.find(x=>x.node===node);
     if(!data){
-      data={node,parent:node.parentElement,placeholder:document.createElement("div")};
-      data.placeholder.className="panel-always-on-top-placeholder";
-      data.placeholder.style.height=`${node.offsetHeight}px`;
-      data.parent.insertBefore(data.placeholder,node);
+      data={node,parent:node.parentElement,nextSibling:node.nextSibling};
       elemenPin.push(data);
-      if(node.id==="alfiyyahPanelArea"&&resizeArea)resizeArea.disconnect();
-      if(node.id==="alfiyyahPanelArea"){
-        resizeArea=new ResizeObserver(()=>{if(data.placeholder.isConnected)data.placeholder.style.height=`${node.offsetHeight}px`});
-        resizeArea.observe(node);
-      }
     }
     if(node.parentElement!==document.body)document.body.append(node);
     node.classList.add(kelas);
@@ -28,10 +20,10 @@ window.initKalibrasiPanel = ({ $, panel, menuUtama, key }) => {
   function kembalikanDariBody(){
     for(const data of [...elemenPin].reverse()){
       data.node.classList.remove("panel-always-on-top","menu-always-on-top");
-      if(data.placeholder.isConnected)data.placeholder.replaceWith(data.node);
+      if(data.parent.isConnected)data.parent.insertBefore(data.node,data.nextSibling?.parentNode===data.parent?data.nextSibling:null);
     }
     elemenPin.length=0;
-    if(resizeArea){resizeArea.disconnect();resizeArea=null}
+
   }
   function sinkronkanAlwaysOnTop(){
     if(!input)return;
@@ -46,10 +38,6 @@ window.initKalibrasiPanel = ({ $, panel, menuUtama, key }) => {
     observerArea=new MutationObserver(sinkronkanAlwaysOnTop);
     observerArea.observe(document.body,{childList:true,subtree:true});
     sinkronkanAlwaysOnTop();
-  }
-  if(input){
-    const baris=input.closest(".opsi-panel") || input.closest("label") || input.parentElement;
-    if(baris){baris.hidden=true;baris.setAttribute("aria-hidden","true")}
   }
   /* Kontrol ukuran font: < slider > persentase. */
   const slider=$("ukuranFont"),out=$("nilaiFont");
