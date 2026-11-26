@@ -4,32 +4,41 @@ window.initKalibrasiPanel = ({ $, panel, menuUtama, key }) => {
   let lastY=scrollY;
   /* Pertahankan input lama untuk sinkronisasi kontrol Menu, tetapi sembunyikan baris visualnya. */
   const input=$("panelAutoHide");
-  let areaPanel=null, placeholderPanel=null, parentPanel=null, observerArea=null, resizeArea=null;
-  function sinkronkanAlwaysOnTop(){
-    const area=document.getElementById("alfiyyahPanelArea");
-    if(!area||!input)return;
-    if(input.checked){
-      if(area.parentElement!==document.body){
-        parentPanel=area.parentElement;
-        placeholderPanel=document.createElement("div");
-        placeholderPanel.className="panel-always-on-top-placeholder";
-        placeholderPanel.style.height=`${area.offsetHeight}px`;
-        parentPanel.insertBefore(placeholderPanel,area);
-        areaPanel=area;
-        document.body.append(area);
-        area.classList.add("panel-always-on-top");
-        if(resizeArea)resizeArea.disconnect();
-        resizeArea=new ResizeObserver(()=>{if(placeholderPanel&&areaPanel)placeholderPanel.style.height=`${areaPanel.offsetHeight}px`});
-        resizeArea.observe(area);
+  const elemenPin=[];
+  let observerArea=null, resizeArea=null;
+  function pindahkanKeBody(id,kelas){
+    const node=document.getElementById(id);
+    if(!node)return;
+    let data=elemenPin.find(x=>x.node===node);
+    if(!data){
+      data={node,parent:node.parentElement,placeholder:document.createElement("div")};
+      data.placeholder.className="panel-always-on-top-placeholder";
+      data.placeholder.style.height=`${node.offsetHeight}px`;
+      data.parent.insertBefore(data.placeholder,node);
+      elemenPin.push(data);
+      if(node.id==="alfiyyahPanelArea"&&resizeArea)resizeArea.disconnect();
+      if(node.id==="alfiyyahPanelArea"){
+        resizeArea=new ResizeObserver(()=>{if(data.placeholder.isConnected)data.placeholder.style.height=`${node.offsetHeight}px`});
+        resizeArea.observe(node);
       }
-    }else if(area.parentElement===document.body&&placeholderPanel&&parentPanel){
-      area.classList.remove("panel-always-on-top");
-      placeholderPanel.replaceWith(area);
-      placeholderPanel=null;
-      parentPanel=null;
-      areaPanel=null;
-      if(resizeArea){resizeArea.disconnect();resizeArea=null}
     }
+    if(node.parentElement!==document.body)document.body.append(node);
+    node.classList.add(kelas);
+  }
+  function kembalikanDariBody(){
+    for(const data of [...elemenPin].reverse()){
+      data.node.classList.remove("panel-always-on-top","menu-always-on-top");
+      if(data.placeholder.isConnected)data.placeholder.replaceWith(data.node);
+    }
+    elemenPin.length=0;
+    if(resizeArea){resizeArea.disconnect();resizeArea=null}
+  }
+  function sinkronkanAlwaysOnTop(){
+    if(!input)return;
+    if(input.checked){
+      pindahkanKeBody("alfiyyahPanelArea","panel-always-on-top");
+      pindahkanKeBody("alfiyyahMenuBlock","menu-always-on-top");
+    }else if(elemenPin.length)kembalikanDariBody();
   }
   if(input){
     input.checked=localStorage.getItem(key.hide)==="1";
