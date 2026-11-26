@@ -65,10 +65,35 @@ window.initKalibrasiPanel = ({ $, panel, menuUtama, key }) => {
       panel.classList.add("panel-tersembunyi");
     }
   };
+  const elemenPin=[];
+  function sinkronkanAlwaysOnTop(){
+    if(!input)return;
+    const aktif=input.checked;
+    if(aktif){
+      for(const id of ["alfiyyahMenuBlock","alfiyyahPanelArea"]){
+        const node=document.getElementById(id);
+        if(!node||node.parentElement===document.body)continue;
+        const parent=node.parentElement;
+        elemenPin.push({node,parent,index:[...parent.childNodes].indexOf(node)});
+        document.body.append(node);
+        node.classList.add(id==="alfiyyahPanelArea"?"panel-always-on-top":"menu-always-on-top");
+      }
+      panel.classList.remove("panel-tersembunyi");
+    }else if(elemenPin.length){
+      for(const data of elemenPin.sort((a,b)=>a.index-b.index)){
+        data.node.classList.remove("panel-always-on-top","menu-always-on-top");
+        const target=data.parent.childNodes[data.index]||null;
+        data.parent.insertBefore(data.node,target);
+      }
+      elemenPin.length=0;
+    }
+  }
+  window.syncPanelAlwaysOnTop=sinkronkanAlwaysOnTop;
   input.addEventListener("change",e=>{
     localStorage.setItem(key.hide,e.target.checked?"1":"0");
-    if(e.target.checked)panel.classList.remove("panel-tersembunyi");
+    sinkronkanAlwaysOnTop();
   });
+  sinkronkanAlwaysOnTop();
   window.addEventListener("scroll",()=>{
     if(window.__alfiyyahSidebarChanging){lastY=scrollY;return}
     if(input.checked)return;
