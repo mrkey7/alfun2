@@ -2,10 +2,10 @@
 "use strict";
 window.initKalibrasiPanel = ({ $, panel, menuUtama, key }) => {
   let lastY=scrollY;
-  /* Pertahankan input lama untuk sinkronisasi kontrol Menu, tetapi sembunyikan baris visualnya. */
+  /* Ceklis Menu mengendalikan Always on Top dan Auto Hide. */
   const input=$("panelAutoHide");
   const elemenPin=[];
-  let observerArea=null, resizeArea=null;
+  let observerArea=null;
   function pindahkanKeBody(id,kelas){
     const node=document.getElementById(id);
     if(!node)return;
