@@ -1,0 +1,17 @@
+{
+  "grid": {
+    "kolom": 24,
+    "baris": 16
+  },
+  "menu": {
+    "target": "A1",
+    "selaluDiAtas": true
+  },
+  "panel": {
+    "mulai": "B1",
+    "akhir": "X1",
+    "rataTengah": true,
+    "baris": 1,
+    "skalaKonten": 0.5
+  }
+}

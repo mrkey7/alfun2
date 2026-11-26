@@ -1,0 +1,23 @@
+{
+  "versi": 1,
+  "halaman": [
+    {
+      "id": "petaH",
+      "nama": "Sampul",
+      "url": "index.html",
+      "aktif": true
+    },
+    {
+      "id": "petaB",
+      "nama": "Muhafadzah",
+      "url": "app/b.html",
+      "aktif": true
+    },
+    {
+      "id": "petaK",
+      "nama": "Asilah",
+      "url": "app/kuis.html",
+      "aktif": false
+    }
+  ]
+}

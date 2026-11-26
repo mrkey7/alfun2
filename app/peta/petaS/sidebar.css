@@ -1,0 +1,456 @@
+/* Paket 6: halaman virtual penuh dengan skala seperti preview Admin. */
+:root {
+  --alfiyyah-sidebar-width: 0px;
+}
+html, body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+body {
+  position: relative;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  padding: 0 !important;
+}
+#alfiyyahScaleSpacer {
+  display: block;
+  width: 1px;
+  min-height: 100dvh;
+  pointer-events: none;
+}
+#alfiyyahScaleStage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  min-height: 100dvh;
+  transform-origin: top left;
+  will-change: transform;
+  overflow: visible;
+  background: transparent;
+}
+#alfiyyahScaleStage > * { max-width: none; }
+#alfiyyahScaleStage::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--alfiyyah-page-boundary, 100dvh);
+  box-sizing: border-box;
+  border: 1px solid rgba(110, 110, 110, .32);
+  pointer-events: none;
+  z-index: 2147483000;
+}
+#alfiyyahSidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 2147483646;
+  width: var(--alfiyyah-sidebar-width);
+  height: 100dvh;
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 54px 16px 20px;
+  background: #f5efdf;
+  color: #302719;
+  border-right: 1px solid #c8b98f;
+  box-shadow: 5px 0 18px #0002;
+  transform: translateX(-100%);
+  transition: transform .22s ease;
+  font: 14px/1.5 system-ui, sans-serif;
+}
+#alfiyyahSidebar.is-open { transform: translateX(0); }
+#alfiyyahSidebar .as-header {
+  margin: 0 0 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #d7c9a7;
+}
+#alfiyyahSidebar .as-title { margin:0; font-size:17px; font-weight:650; }
+#alfiyyahSidebar .as-subtitle { margin:3px 0 0; color:#76694f; font-size:12px; }
+#alfiyyahSidebar .as-section { margin:0 0 14px; }
+#alfiyyahSidebar .as-section-title {
+  margin:0 0 9px;
+  color:#796b50;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+#alfiyyahSidebar .as-note {
+  padding:12px;
+  border:1px solid #ded2b5;
+  border-radius:8px;
+  background:#fbf7ec;
+  color:#5b4d35;
+}
+#alfiyyahSidebar button,
+#alfiyyahSidebar input { font:inherit; }
+#alfiyyahSidebar .as-field { display:block; margin:0 0 14px; }
+#alfiyyahSidebar .as-field > span {
+  display:flex; justify-content:space-between; gap:10px; margin-bottom:5px;
+}
+#alfiyyahSidebar input[type="range"] { width:100%; accent-color:#806638; }
+#alfiyyahSidebar .as-check { display:flex; align-items:center; gap:8px; margin:0 0 16px; }
+#alfiyyahSidebar .as-actions { display:flex; align-items:center; gap:10px; margin-top:16px; }
+#alfiyyahSidebar .as-save {
+  padding:8px 16px; border:0; border-radius:6px;
+  background:#66512e; color:#fff; cursor:pointer;
+}
+#alfiyyahSidebar .as-save:disabled { opacity:.55; cursor:wait; }
+#alfiyyahSidebar .as-status { min-height:20px; color:#76694f; font-size:12px; }
+#alfiyyahSidebar .as-status.success { color:#287447; }
+#alfiyyahSidebar .as-status.error { color:#a32626; }
+
+@media (prefers-reduced-motion: reduce) {
+  #alfiyyahSidebar { transition:none; }
+}
+
+/* PAKET-7-AREA-TRANSPARAN */
+html,
+body {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+#alfiyyahScaleStage { background: transparent !important; }
+#alfiyyahScaleSpacer { background: transparent !important; }
+
+/* PAKET-8-FOOTER-SAMPUl */
+#alfiyyahScaleStage:has(#blokSampul) {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    height: 100dvh;
+    min-height: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+#alfiyyahScaleStage:has(#blokSampul) > #blokSampul {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    margin: 0;
+}
+#alfiyyahScaleStage:has(#blokSampul) > .kaki-beranda {
+    flex: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* PAKET-9-CHECKERBOARD-TRANSPARANSI */
+html,
+body {
+    background-color: #fff !important;
+    background-image:
+        linear-gradient(45deg, #c8c8c8 25%, transparent 25%),
+        linear-gradient(-45deg, #c8c8c8 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #c8c8c8 75%),
+        linear-gradient(-45deg, transparent 75%, #c8c8c8 75%) !important;
+    background-size: 24px 24px !important;
+    background-position: 0 0, 0 12px, 12px -12px, -12px 0 !important;
+    background-repeat: repeat !important;
+}
+#alfiyyahScaleStage { background: transparent !important; }
+#alfiyyahScaleSpacer { background: transparent !important; }
+
+/* PAKET-11-POSISI-MENU-BAIT */
+body.alfiyyah-sidebar-open #alfiyyahScaleStage .menu-utama {
+    left: 8px !important;
+}
+
+/* PAKET 1 – PETA KONTEN */
+#alfiyyahScaleStage { left: 0; }
+#alfiyyahScaleStage .menu-utama { z-index: 2147483647; }
+#alfiyyahScaleStage .kendali { z-index: 2147483646; }
+
+/* PAKET 2 – PETA B (HALAMAN BAIT) */
+#alfiyyahPetaB {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  box-sizing: border-box;
+}
+/* Menu Bait mengikuti petaB melalui #alfiyyahScaleStage. */
+#alfiyyahPetaB .kendali {
+  position: sticky;
+  top: 0;
+  z-index: 2147483646;
+  flex: 0 0 auto;
+}
+#alfiyyahPetaB .kendali.panel-tersembunyi {
+  display: none !important;
+  transform: none !important;
+}
+#alfiyyahPetaB #daftarBait {
+  flex: 1 0 auto;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* PAKET 8-3: Sidebar berbasis petak petaS dan navigasi pengaturan kontekstual. */
+:root {
+  --alfiyyah-sidebar-width: 0px;
+  --alfiyyah-sidebar-base-width: 25vw;
+  --alfiyyah-sidebar-scale: 1;
+}
+#alfiyyahSidebar {
+  width: var(--alfiyyah-sidebar-width);
+  padding: 0;
+  overflow: hidden;
+  transform: translateX(-100%);
+  transition: transform .22s ease;
+}
+#alfiyyahSidebar.is-open { transform: translateX(0); }
+#alfiyyahSidebarInner {
+  position: relative;
+  width: var(--alfiyyah-sidebar-base-width);
+  height: calc(100dvh / var(--alfiyyah-sidebar-scale, 1));
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 54px 16px 20px;
+  zoom: var(--alfiyyah-sidebar-scale, 1);
+  transform-origin: top left;
+}
+#alfiyyahSidebar .as-header { margin: 0 0 14px; padding-bottom: 12px; }
+#alfiyyahSidebar .as-nav { display: grid; gap: 3px; margin: 0 0 14px; }
+#alfiyyahSidebar .as-nav-item {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; min-height: 36px; padding: 7px 10px;
+  border: 1px solid transparent; border-radius: 6px;
+  background: transparent; color: #302719; text-align: left; cursor: pointer;
+  transition: background .12s ease, border-color .12s ease;
+}
+#alfiyyahSidebar .as-nav-item:hover,
+#alfiyyahSidebar .as-nav-item.is-hover { background: #eee4ce; }
+#alfiyyahSidebar .as-nav-item.is-selected { border-color: #c8b98f; background: #e8dcc3; font-weight: 650; }
+#alfiyyahSidebar .as-nav-arrow { color: #806638; font-size: 18px; line-height: 1; }
+#alfiyyahSidebar .as-panel { margin-top: 8px; padding-top: 12px; border-top: 1px solid #d7c9a7; }
+#alfiyyahSidebar .as-panel-title {
+  margin: 0 0 10px; color: #796b50; font-size: 11px;
+  font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+}
+#alfiyyahSidebar .as-panel-content { min-width: 0; }
+@media (prefers-reduced-motion: reduce) { #alfiyyahSidebar { transition: none; } }
+
+
+
+/* Kontrol mode berada di strip atas petaS, sejajar dengan ikon buka/tutup.
+   Strip sticky mengikuti skala inner dan tidak ikut menggulir bersama panel. */
+#alfiyyahSidebar .as-top-controls {
+  position: sticky;
+  top: 8px;
+  z-index: 12;
+  display: flex;
+  justify-content: flex-end;
+  height: 0;
+  padding-right: 30px;
+  overflow: visible;
+  pointer-events: none;
+}
+#alfiyyahSidebar .as-header { margin-top: 0; }
+
+
+
+/* SUBMENU HOVER: kolom kedua melayang di luar batas petaS. */
+#alfiyyahSidebar { overflow: visible; }
+#alfiyyahSidebarInner { overflow-x: visible; }
+#alfiyyahSidebar .as-nav { position: relative; overflow: visible; }
+#alfiyyahSidebar .as-nav-item { position: relative; }
+#alfiyyahSidebar .as-nav-item.is-selected {
+  border-color: #c8b98f;
+  background: #e8dcc3;
+  font-weight: 650;
+}
+#alfiyyahSidebarFlyout {
+  position: fixed;
+  z-index: 2147483647;
+  width: min(300px, calc(100vw - var(--alfiyyah-sidebar-width, 0px) - 16px));
+  max-height: calc(100dvh - 16px);
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 14px;
+  border: 1px solid #c8b98f;
+  border-radius: 8px;
+  background: #f5efdf;
+  color: #302719;
+  box-shadow: 5px 5px 20px #0003;
+  font: 14px/1.5 system-ui, sans-serif;
+}
+#alfiyyahSidebarFlyout[hidden] { display: none !important; }
+#alfiyyahSidebarFlyout .as-panel-title {
+  margin: 0 0 12px;
+  color: #796b50;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+#alfiyyahSidebarFlyout .as-panel-content { min-width: 0; }
+
+
+/* FIX GPT-21: cegah isi sidebar dan submenu terlihat saat sidebar tertutup. */
+#alfiyyahSidebar {
+  visibility: hidden;
+  transition: transform .22s ease, visibility 0s linear .22s;
+}
+#alfiyyahSidebar.is-open {
+  visibility: visible;
+  transition: transform .22s ease, visibility 0s;
+}
+body:not(.alfiyyah-sidebar-open) #alfiyyahSidebarFlyout {
+  display: none !important;
+}
+
+
+/* TOOL SIDEBAR: tool yang dipilih melalui checklist tampil di bawah navigasi. */
+#alfiyyahSidebarToolArea {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #d7c9a7;
+}
+#alfiyyahSidebarToolArea[hidden] { display: none !important; }
+#alfiyyahSidebarToolArea .as-panel-title {
+  margin: 0 0 10px;
+  color: #796b50;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+#alfiyyahSidebarToolArea .as-panel-content { min-width: 0; }
+#alfiyyahSidebarFlyout .as-tool-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 5px 7px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#alfiyyahSidebarFlyout .as-tool-toggle:hover {
+  background: #eee4ce;
+}
+#alfiyyahSidebarFlyout .as-tool-toggle input {
+  accent-color: #806638;
+}
+
+
+/* SUBMENU UMUM: gunakan tinggi ruang yang tersedia dan scroll bila diperlukan. */
+#alfiyyahSidebarFlyout {
+  max-height: calc(100dvh - 16px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+#alfiyyahSidebarFlyout .as-general-subnav {
+  max-height: none;
+  overflow: visible;
+}
+#alfiyyahSidebarFlyout .as-subnav-item {
+  display: block;
+  width: 100%;
+  min-height: 34px;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #302719;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+#alfiyyahSidebarFlyout .as-subnav-item:hover,
+#alfiyyahSidebarFlyout .as-subnav-item.is-selected {
+  background: #eee4ce;
+}
+#alfiyyahSidebarFlyout .as-subnav-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#alfiyyahSidebarFlyout .as-subnav-check:hover { background: #eee4ce; }
+#alfiyyahSidebarFlyout .as-subnav-check input { accent-color: #806638; }
+
+
+/* MODE DEBUG: panel diagnostik terpisah dari struktur PetaS dan PetaP. */
+#alfiyyahModeDebug {
+  position: fixed;
+  inset: 50% auto auto 50%;
+  z-index: 2147483647;
+  width: min(360px, calc(100vw - 32px));
+  max-height: min(70dvh, 620px);
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 14px;
+  border: 1px solid #c8b98f;
+  border-radius: 10px;
+  background: #f5efdf;
+  color: #302719;
+  box-shadow: 0 12px 40px #0005;
+  transform: translate(-50%, -50%);
+  font: 14px/1.5 system-ui, sans-serif;
+}
+#alfiyyahModeDebug[hidden] { display: none !important; }
+#alfiyyahModeDebug .ad-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid #d7c9a7;
+}
+#alfiyyahModeDebug .ad-header strong { flex: 1; font-size: 15px; }
+#alfiyyahModeDebug .ad-header span { color: #76694f; font-size: 12px; }
+#alfiyyahModeDebug .ad-header button {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font-size: 22px;
+  cursor: pointer;
+}
+#alfiyyahModeDebug .ad-group {
+  margin: 8px 0;
+  padding: 9px 10px;
+  border: 1px solid #ded2b5;
+  border-radius: 7px;
+  background: #fbf7ec;
+}
+#alfiyyahModeDebug .ad-group-title {
+  margin-bottom: 5px;
+  color: #796b50;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+#alfiyyahModeDebug .ad-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 32px;
+  cursor: pointer;
+}
+#alfiyyahModeDebug .ad-item input { accent-color: #806638; }
+#ikonDebugA1[aria-pressed="true"] { background: #e8dcc3 !important; }
+
+/* Mode Debug: atribut hidden harus mengalahkan display dari layout masing-masing blok. */
+#alfiyyahSidebar[hidden],
+#alfiyyahMenuBlock[hidden],
+#alfiyyahPanelArea[hidden],
+#alfiyyahIsiBlock[hidden] {
+  display: none !important;
+}
+

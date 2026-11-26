@@ -1,0 +1,5 @@
+/* Aturan tampilan khusus AUTOFIT. */
+.petak .bait{font-size:calc(var(--font-dasar) * var(--skala-konten,1) * var(--zoom-bantuan,1))}
+.petak .judul{font-size:calc(var(--font-dasar) * (1 + var(--tambahan-font-judul)) * var(--skala-konten,1) * var(--zoom-bantuan,1))}
+.petak .nomor{font-size:calc(.5em * (1 - var(--pengurangan-font-nomor)))}
+.petak-terkunci .pegangan-ukuran::after{background:#16a34a}

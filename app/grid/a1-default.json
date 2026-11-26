@@ -1,0 +1,31 @@
+{
+  "peta": "S",
+  "kolom": 10,
+  "baris": 20,
+  "target": "A1",
+  "konten": {
+    "jenis": "teks",
+    "nilai": ""
+  },
+  "ukuran": {
+    "kolom": 1,
+    "baris": 1,
+    "mode": "sel",
+    "lebar": 28,
+    "tinggi": 28
+  },
+  "teks": {
+    "skala": 0.8,
+    "horizontal": "tengah",
+    "vertikal": "tengah",
+    "bungkus": false,
+    "arah": "auto"
+  },
+  "tampilan": {
+    "warna": null,
+    "latar": null,
+    "tebal": false,
+    "miring": false,
+    "padding": 0
+  }
+}

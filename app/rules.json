@@ -1,0 +1,34 @@
+{
+  "general": {
+    "cache": false
+  },
+  "sampul": {
+    "id": "S",
+    "tampilkan": true,
+    "judul": 16,
+    "penyusun": 3
+  },
+  "bait": {
+    "id": "B",
+    "ukuran": 50,
+    "fontbawaan": "Traditional Arabic",
+    "fontjudul+": 10,
+    "fontnomor-": 20,
+    "jarakantarbaris": {
+      "Amiri": 0,
+      "Noto Naskh Arabic": -0.5,
+      "Noto Sans Arabic": -0.3,
+      "Traditional Arabic": -0.8
+    },
+    "garispetak": true,
+    "tatweel": {
+      "aktif": false,
+      "mode": "semua"
+    },
+    "max": 20,
+    "ornamen": false
+  },
+  "kuis": {
+    "id": "K"
+  }
+}

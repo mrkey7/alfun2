@@ -1,0 +1,139 @@
+
+.kendali{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px 14px;padding:10px 14px 10px 56px;background:var(--latar-kendali);backdrop-filter:blur(8px);font-size:14px;transition:transform .2s}
+.kendali label{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.kendali select,
+.kendali input[type=number]{max-width:180px;padding:3px 5px;border:1px solid var(--garis-kontrol);border-radius:5px;background:var(--latar-kontrol);color:var(--warna-kontrol);font:inherit}
+#pilihFont{width:138px;max-width:138px}
+#pilihTema{width:88px;max-width:88px}
+.kendali input[type=range]{
+  width:160px;
+  min-width:40px;
+  max-width:100%;
+  flex:0 1 160px;
+  box-sizing:border-box;
+  accent-color:var(--warna-nomor);
+}
+.kendali output{min-width:3.5em;font-variant-numeric:tabular-nums}
+#batasBait{width:4.5em}
+.opsi{cursor:pointer}
+.opsi input,
+.opsi-panel input{margin:0}
+.opsi-panel{display:flex!important;gap:10px;padding:11px 14px;border-top:1px solid var(--garis-kontrol)}
+.panel-tersembunyi{transform:translateY(-110%)}
+
+/* Sorotan pada isi menu utama tetap mengikuti tema aktif. */
+.opsi-panel{
+  transition:background-color .12s ease;
+  touch-action:manipulation;
+}
+@media (hover:hover) and (pointer:fine){
+  .opsi-panel:hover{
+    background:var(--latar-isi-2);
+  }}
+.opsi-panel:active{
+  background:var(--latar-isi-2);
+}
+.opsi-panel:focus-within{
+  background:var(--latar-isi-2);
+  outline:2px solid var(--warna-nomor);
+  outline-offset:1px;
+}
+@media(max-width:600px){
+  .kendali{justify-content:flex-start;gap:5px 7px;padding:7px 7px 7px 49px}
+  .kendali input[type=range]{
+  width:130px;
+  flex-basis:130px;
+}
+  #pilihFont{width:126px;max-width:126px}
+  #pilihTema{width:82px;max-width:82px}}
+
+/* Paket 43: lebar kontrol mengikuti isi. */
+.kendali > label{
+  flex:0 0 auto;
+  width:max-content;
+  white-space:nowrap;
+}
+.opsi-panel{
+  width:max-content;
+  flex:0 0 auto;
+  align-items:center;
+  white-space:nowrap;
+}
+.opsi-panel input{
+  order:1;
+}
+/* Paket 44: samakan lebar item Panel dengan item menu lain. */
+.opsi-panel{
+  width:100%;
+  flex:0 0 100%;
+  box-sizing:border-box;
+  justify-content:flex-start;
+  align-items:center;
+  white-space:nowrap;
+}
+.opsi-panel input{
+  order:1;
+}
+.kendali{
+  z-index:2147483646;
+
+}
+
+/* Tombol AUTOFIT di Panel: ukuran mengikuti kontrol panel yang lain. */
+.status-kalibrasi{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:0;font:inherit}
+.status-kalibrasi .tombol-autofit,.status-kalibrasi .tombol-lock{min-height:0;padding:3px 7px;border-radius:5px;font:inherit;line-height:1.2}
+
+/* Samakan penyembunyian baris Autohide panel dengan halaman Bait. */
+.opsi-panel:has(#panelAutoHide){
+  display:none!important;
+}
+
+#panelKendali label[hidden],
+#panelKendali [hidden] {
+  display: none !important;
+}
+/* Kontrol ukuran font Panel: < slider > persentase. */
+.kendali > label.opsi-ukuran{
+  flex:0 1 auto;
+  width:auto;
+  min-width:0;
+  max-width:100%;
+}
+.panel-ukuran-kontrol{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  min-width:0;
+  max-width:100%;
+}
+.panel-ukuran-kontrol input[type=range]{
+  width:160px;
+  min-width:40px;
+  max-width:100%;
+  flex:0 1 160px;
+  margin:0;
+}
+.panel-ukuran-panah{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 18px;
+  width:18px;
+  height:24px;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:var(--warna-kontrol);
+  font:14px/1 system-ui,sans-serif;
+  cursor:pointer;
+}
+.panel-ukuran-kontrol output{
+  flex:0 0 auto;
+  min-width:3.5em;
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+  cursor:pointer;
+}
+@media(max-width:600px){
+  .panel-ukuran-kontrol input[type=range]{width:130px;flex-basis:130px}
+}

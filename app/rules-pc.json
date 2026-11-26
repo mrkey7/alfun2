@@ -1,0 +1,10 @@
+{
+  "ukuranfontbawaan": {
+    "portait": 100,
+    "landscape": 100
+  },
+  "pengurangmaksimal": {
+    "portait": 1,
+    "landscape": 1
+  }
+}

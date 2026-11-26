@@ -1,0 +1,24 @@
+{
+  "skala": {
+    "Amiri": {
+      "autofit": 554.0,
+      "target": 1000.0,
+      "faktor": 1.805054
+    },
+    "Noto Naskh Arabic": {
+      "autofit": 626.0,
+      "target": 552.34,
+      "faktor": 0.882328
+    },
+    "Noto Sans Arabic": {
+      "autofit": 701.0,
+      "target": 1000.0,
+      "faktor": 1.426534
+    },
+    "Traditional Arabic": {
+      "autofit": 397.0,
+      "target": 1000.0,
+      "faktor": 2.518892
+    }
+  }
+}
