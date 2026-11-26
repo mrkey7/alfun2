@@ -454,3 +454,27 @@ body:not(.alfiyyah-sidebar-open) #alfiyyahSidebarFlyout {
   display: none !important;
 }
 
+
+/* Always on Top Panel Bait: panel dipindahkan keluar dari stage yang di-transform. */
+#alfiyyahPanelArea.panel-always-on-top{
+  position:fixed!important;
+  top:0!important;
+  left:var(--peta-p-left,0px)!important;
+  width:var(--peta-p-grid-width,100vw)!important;
+  z-index:2147483646!important;
+  transform:scale(var(--peta-p-scale,1));
+  transform-origin:top left;
+}
+#alfiyyahPanelArea.panel-always-on-top #panelKendali{
+  position:relative!important;
+  top:auto!important;
+  width:100%;
+  box-sizing:border-box;
+}
+.panel-always-on-top-placeholder{
+  display:block;
+  flex:0 0 auto;
+  width:100%;
+  visibility:hidden;
+  pointer-events:none;
+}
