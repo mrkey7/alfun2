@@ -3,32 +3,6 @@
 
   const STORAGE_KEY = "alfiyyah.panel.layout";
 
-  const TOP_KEY = "alfiyyah.panel.alwaysOnTop";
-  function initAlwaysOnTop() {
-    const area = document.getElementById("alfiyyahPanelArea");
-    if (!area || area.dataset.alwaysOnTopReady === "true") return;
-    const kendali = area.querySelector("#panelKendali");
-    if (!kendali) return;
-    area.dataset.alwaysOnTopReady = "true";
-    const label = document.createElement("label");
-    label.className = "opsi-panel opsi-always-on-top";
-    const input = document.createElement("input");
-    input.type = "checkbox"; input.id = "panelAlwaysOnTop";
-    const teks = document.createElement("span"); teks.textContent = "Always on Top";
-    label.append(teks, input); kendali.append(label);
-    try { const saved = localStorage.getItem(TOP_KEY); input.checked = saved === null || saved === "1"; }
-    catch { input.checked = true; }
-    const apply = () => {
-      area.dataset.alwaysOnTop = String(input.checked);
-      area.style.zIndex = input.checked ? "2147483646" : "1";
-      try { localStorage.setItem(TOP_KEY, input.checked ? "1" : "0"); } catch {}
-    };
-    input.addEventListener("change", apply); apply();
-  }
-  const panelObserver = new MutationObserver(initAlwaysOnTop);
-  panelObserver.observe(document.body, { childList:true, subtree:true });
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initAlwaysOnTop, { once:true });
-  else initAlwaysOnTop();
   const BATAS = { min:1, max:64 };
   const SKALA = { min:0.1, max:1, step:0.05 };
   let bawaan = null;
