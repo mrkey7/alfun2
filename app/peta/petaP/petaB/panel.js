@@ -65,8 +65,6 @@ window.initKalibrasiPanel = ({ $, panel, menuUtama, key }) => {
       panel.classList.add("panel-tersembunyi");
     }
   };
-  });
-  sinkronkanAlwaysOnTop();
   window.addEventListener("scroll",()=>{
     if(window.__alfiyyahSidebarChanging){lastY=scrollY;return}
     if(input.checked)return;
