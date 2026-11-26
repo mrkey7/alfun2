@@ -478,3 +478,17 @@ body:not(.alfiyyah-sidebar-open) #alfiyyahSidebarFlyout {
   visibility:hidden;
   pointer-events:none;
 }
+
+/* Menu ikut keluar dari stacking context stage dan ditempatkan di atas panel. */
+#alfiyyahMenuBlock.menu-always-on-top{
+  position:fixed!important;
+  top:0!important;
+  left:var(--peta-p-left,0px)!important;
+  z-index:2147483647!important;
+  transform:scale(var(--peta-p-scale,1));
+  transform-origin:top left;
+  pointer-events:auto!important;
+}
+#alfiyyahMenuBlock.menu-always-on-top *{
+  pointer-events:auto;
+}
