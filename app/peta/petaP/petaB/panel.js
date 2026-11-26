@@ -4,6 +4,39 @@ window.initKalibrasiPanel = ({ $, panel, menuUtama, key }) => {
   let lastY=scrollY;
   /* Pertahankan input lama untuk sinkronisasi kontrol Menu, tetapi sembunyikan baris visualnya. */
   const input=$("panelAutoHide");
+  let areaPanel=null, placeholderPanel=null, parentPanel=null, observerArea=null, resizeArea=null;
+  function sinkronkanAlwaysOnTop(){
+    const area=document.getElementById("alfiyyahPanelArea");
+    if(!area||!input)return;
+    if(input.checked){
+      if(area.parentElement!==document.body){
+        parentPanel=area.parentElement;
+        placeholderPanel=document.createElement("div");
+        placeholderPanel.className="panel-always-on-top-placeholder";
+        placeholderPanel.style.height=`${area.offsetHeight}px`;
+        parentPanel.insertBefore(placeholderPanel,area);
+        areaPanel=area;
+        document.body.append(area);
+        area.classList.add("panel-always-on-top");
+        if(resizeArea)resizeArea.disconnect();
+        resizeArea=new ResizeObserver(()=>{if(placeholderPanel&&areaPanel)placeholderPanel.style.height=`${areaPanel.offsetHeight}px`});
+        resizeArea.observe(area);
+      }
+    }else if(area.parentElement===document.body&&placeholderPanel&&parentPanel){
+      area.classList.remove("panel-always-on-top");
+      placeholderPanel.replaceWith(area);
+      placeholderPanel=null;
+      parentPanel=null;
+      areaPanel=null;
+      if(resizeArea){resizeArea.disconnect();resizeArea=null}
+    }
+  }
+  if(input){
+    input.addEventListener("change",sinkronkanAlwaysOnTop);
+    observerArea=new MutationObserver(sinkronkanAlwaysOnTop);
+    observerArea.observe(document.body,{childList:true,subtree:true});
+    sinkronkanAlwaysOnTop();
+  }
   if(input){
     const baris=input.closest(".opsi-panel") || input.closest("label") || input.parentElement;
     if(baris){baris.hidden=true;baris.setAttribute("aria-hidden","true")}
