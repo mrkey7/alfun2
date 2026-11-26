@@ -4,7 +4,7 @@
   },
   "sampul": {
     "id": "S",
-    "tampilkan": true,
+    "tampilkan": false,
     "judul": 16,
     "penyusun": 3
   },
