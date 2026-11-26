@@ -234,7 +234,7 @@ async function start(){
 		slider.dataset.defaultValue=String(ukuranDefault);
 		slider.value=ukuranTersimpan??ukuranDefault;
 				
-		terapkanZoomBantuan();$("panelAutoHide").checked=localStorage.getItem(key.hide)==="1";window.syncPanelAlwaysOnTop?.();render();
+		terapkanZoomBantuan();$("panelAutoHide").checked=localStorage.getItem(key.hide)==="1";render();
   }catch(e){wadah.replaceChildren(el("div","error",`Gagal memuat Alfiyyah: ${e.message}`));console.error(e)}
 }
 pilihFont.addEventListener("change",()=>{
