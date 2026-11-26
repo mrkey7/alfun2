@@ -1,0 +1,286 @@
+/*
+ * Panel Bait
+ * Satu ukuran bersama untuk seluruh konten Panel.
+ * Ukuran maksimum font = tinggi satu baris grid Panel.
+ */
+
+:root {
+  --panel-grid-columns: 24;
+  --panel-grid-rows: 16;
+  --panel-area-rows: 1;
+  --panel-skala-konten: 0.5;
+}
+
+/* Baris Panel: grid 24 kolom, tinggi tepat satu baris. */
+#alfiyyahPanelArea {
+  position: relative;
+  z-index: 2147483646;
+  --panel-grid-cell-height: calc(var(--peta-p-grid-height, 768px) / var(--panel-grid-rows, 16));
+  --panel-content-size: calc(var(--panel-grid-cell-height) * var(--panel-skala-konten));
+  position: relative;
+  z-index: 2147483646;
+  display: block;
+  width: 100%;
+  height: calc(var(--panel-grid-cell-height) * var(--panel-area-rows, 1));
+  min-width: 0;
+  min-height: 0;
+  grid-row: 1;
+  flex: none;
+}
+
+/* Ikon Menu A1 — duplikasi gaya ikon Sidebar. */
+#tombolMenuUtama {
+  appearance: none;
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--warna-kontrol, currentColor);
+  box-shadow: none;
+  cursor: pointer;
+}
+#tombolMenuUtama:hover,
+#tombolMenuUtama:focus-visible {
+  background: var(--latar-isi-2, #e8dcc3);
+}
+#tombolMenuUtama:focus-visible {
+  outline: 2px solid var(--warna-nomor, #98763c);
+  outline-offset: 1px;
+}
+#tombolMenuUtama svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+/* Area kontrol B1:X1. Tidak memakai zoom atau kompensasi lebar. */
+#alfiyyahPanelArea > #panelKendali {
+  position: relative;
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 0.25em;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0 0.25em;
+  overflow: visible;
+  box-sizing: border-box;
+
+  /* Semua anak mewarisi satu ukuran yang sama. */
+  font-family: system-ui, sans-serif;
+  font-size: var(--panel-content-size);
+  font-weight: 400;
+  line-height: 0.95;
+  color: var(--warna-kontrol);
+}
+
+/* Hilangkan ukuran dan lebar mandiri yang diwarisi dari gaya lama. */
+#alfiyyahPanelArea #panelKendali *,
+#alfiyyahPanelArea #panelKendali *::before,
+#alfiyyahPanelArea #panelKendali *::after {
+  box-sizing: border-box;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+#alfiyyahPanelArea #panelKendali > .opsi-panel,
+#alfiyyahPanelArea #panelKendali .opsi-panel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 0;
+  max-width: max-content;
+  height: 100%;
+  margin: 0;
+  padding: 0 0.25em;
+  border: 0;
+  white-space: nowrap;
+}
+
+#alfiyyahPanelArea #panelKendali label,
+#alfiyyahPanelArea #panelKendali select,
+#alfiyyahPanelArea #panelKendali button,
+#alfiyyahPanelArea #panelKendali output,
+#alfiyyahPanelArea #panelKendali input {
+  font: inherit;
+  line-height: 1;
+}
+
+#alfiyyahPanelArea #panelKendali label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2em;
+  width: auto;
+  min-width: 0;
+  max-width: max-content;
+  height: 100%;
+  white-space: nowrap;
+}
+
+#alfiyyahPanelArea #panelKendali select,
+#alfiyyahPanelArea #panelKendali button {
+  height: 1em;
+  max-height: 100%;
+  min-width: 0;
+  padding: 0 0.2em;
+}
+
+#alfiyyahPanelArea #panelKendali input[type="checkbox"] {
+  width: 0.8em;
+  height: 0.8em;
+  min-width: 0.8em;
+  margin: 0;
+  padding: 0;
+}
+
+#alfiyyahPanelArea #panelKendali input[type="range"] {
+  width: 4em;
+  height: 1em;
+  margin: 0;
+  padding: 0;
+}
+
+#alfiyyahPanelArea #panelKendali .panel-ukuran-kontrol {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15em;
+  height: 100%;
+  min-width: 0;
+}
+
+#alfiyyahPanelArea #panelKendali .panel-ukuran-panah {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1em;
+  min-width: 1.1em;
+  height: 1.1em;
+  padding: 0;
+}
+
+#alfiyyahPanelArea #panelKendali .panel-ukuran-nilai {
+  display: inline-flex;
+  align-items: center;
+  height: 1.1em;
+  padding: 0 0.2em;
+  cursor: pointer;
+}
+
+/* Panel tetap berada di atas konten Bait dan tidak mengubah alur Bait. */
+#alfiyyahPetaB {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--panel-grid-columns, 24), minmax(0, 1fr));
+  grid-template-rows: auto;
+  align-items: start;
+  height: auto;
+  min-height: 0;
+  isolation: isolate;
+}
+#alfiyyahPetaB[data-panel-present="true"] {
+  grid-template-rows: var(--panel-area-height, 48px) auto;
+}
+
+/* Menu selalu ada di A1 sebagai overlay; tidak mengambil ruang grid. */
+#alfiyyahMenuBlock {
+  position: absolute;
+  z-index: 2147483647;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: calc(100% / var(--panel-grid-columns, 24));
+  height: var(--panel-area-height, 48px);
+  min-width: 0;
+  min-height: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+#alfiyyahMenuBlock > .menu-utama {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: visible;
+  background: transparent;
+  box-shadow: none;
+  pointer-events: auto;
+}
+#alfiyyahMenuBlock #tombolMenuUtama {
+  width: 100%;
+  height: 100%;
+  max-width: calc(var(--peta-p-grid-width, 1200px) / var(--panel-grid-columns, 24));
+  max-height: var(--panel-area-height, 48px);
+  border-radius: 0;
+}
+#alfiyyahMenuBlock #tombolMenuUtama svg {
+  width: min(100%, 1.5em);
+  height: min(100%, 1.5em);
+}
+#alfiyyahPanelArea {
+  position: relative;
+  z-index: var(--panel-z-index, 2147483646);
+  grid-column: 2 / -1;
+  grid-row: 1;
+  width: 100%;
+  min-width: 0;
+}
+#alfiyyahIsiBlock {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  min-height: 0;
+  height: auto;
+  background-color: var(--latar-halaman, #eee1bd);
+  background-image: none;
+}
+#alfiyyahPetaB[data-panel-present="true"] > #alfiyyahIsiBlock {
+  grid-row: 2;
+}
+#alfiyyahPanelArea > #panelKendali {
+  position: relative;
+  top: auto;
+  width: 100%;
+}
+#alfiyyahIsiBlock {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+#alfiyyahIsiBlock > #daftarBait {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 600px) {
+  #alfiyyahPanelArea > #panelKendali {
+    gap: 0.15em;
+    padding-inline: 0.15em;
+  }
+}
+
+
+/* Always on Top: prioritas panel dapat diubah melalui ceklist. */
+#alfiyyahPanelArea[data-always-on-top="true"] { z-index: 2147483646; }
+#alfiyyahPanelArea[data-always-on-top="false"] { z-index: 1; }
+
+
+/* Ceklist Always on Top: status diatur langsung dari panel.js. */
+#alfiyyahPanelArea .opsi-always-on-top { cursor:pointer; }

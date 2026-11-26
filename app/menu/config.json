@@ -1,0 +1,13 @@
+{
+  "versi": 1,
+  "jump": {
+    "aktif": true,
+    "label": "Jump",
+    "ikon": "arrow-left-right",
+    "interaksi": "hover"
+  },
+  "preview": {
+    "skala": 100,
+    "blur": false
+  }
+}

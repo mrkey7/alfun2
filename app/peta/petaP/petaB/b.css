@@ -1,0 +1,90 @@
+/* Kalibrasi petak bantu dan pengukuran font. */
+:root{
+  --font-arab:"Noto Naskh Arabic";--skala-font:1;--jarak-baris:0;
+  --tambahan-font-judul:0;--pengurangan-font-nomor:0;
+  --font-dasar:clamp(1.25rem,2vw,2rem);
+  --warna-teks:#302719;--warna-nomor:#796b50;--latar-halaman:#eee1bd;
+  --latar-kendali:#D6C18B;--latar-kontrol:#f8f0d9;--garis-kontrol:#c8b98f;
+  --warna-kontrol:#302719;--latar-judul:#e3d3a7;--latar-isi-2:#eadbb5;--latar-isi-1:#f2e8cc;
+}
+:root[data-tema="terang"]{--warna-teks:#20252b;--warna-nomor:#68727d;--latar-halaman:#fff;--latar-kendali:#DCE4ED;--latar-kontrol:#fff;--garis-kontrol:#d4d9df;--warna-kontrol:#20252b;--latar-judul:#e8edf3;--latar-isi-2:#f0f3f7;--latar-isi-1:#f8f9fb}
+:root[data-tema="gelap"]{--warna-teks:#e8e1d5;--warna-nomor:#a69a87;--latar-halaman:#17191c;--latar-kendali:#403A32;--latar-kontrol:#292d32;--garis-kontrol:#4a5058;--warna-kontrol:#eee8de;--latar-judul:#34302a;--latar-isi-2:#292d31;--latar-isi-1:#22262a}
+*{box-sizing:border-box}html,body{min-height:100%;margin:0}
+body{background:var(--latar-halaman);color:var(--warna-teks);font-family:system-ui,sans-serif}
+#daftarBait{width:100%;margin:0 auto;overflow:visible}
+.pembungkus-petak{position:relative;display:flex;justify-content:center;align-items:flex-start;width:100%;margin:0 auto;overflow:visible}
+.petak{position:relative;z-index:1;top:0;left:auto;width:100%;max-width:none;flex:0 0 auto;margin:0 auto;transform:none;transform-origin:top center}
+.pegangan-ukuran{position:absolute;z-index:5;top:0;bottom:0;width:18px;touch-action:none;cursor:ew-resize}
+.pegangan-kiri{left:-9px}.pegangan-kanan{right:-9px}
+.pegangan-ukuran::after{content:"";position:absolute;top:0;bottom:0;left:8px;width:2px;background:transparent;transition:background .12s}
+.pegangan-ukuran:hover::after,.pegangan-ukuran:active::after{background:#00A6C7}
+.garis-petak .petak::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:1px;background:#00A6C7;pointer-events:none}
+.baris{direction:rtl;font-family:var(--font-arab),serif;font-weight:400;font-synthesis:none}
+.bait{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;column-gap:.25em;padding:.12em 0;font-size:var(--font-dasar);line-height:calc(1.65 + var(--jarak-baris))}
+.kanan,.kiri{min-width:0;white-space:nowrap;direction:rtl}.kanan{text-align:left}.kiri{text-align:right}
+.nomor{direction:ltr;text-align:center;white-space:nowrap;font-size:calc(.5em * (1 - var(--pengurangan-font-nomor)));line-height:1;color:var(--warna-nomor)}
+.judul{display:flex;width:100%;align-items:center;justify-content:center;gap:.35em;margin:0;padding:.45em 0 .2em;color:var(--warna-teks);font-size:calc(var(--font-dasar) * (1 + var(--tambahan-font-judul)));font-weight:400;line-height:calc(1.65 + var(--jarak-baris));white-space:nowrap}
+.teks-judul{white-space:nowrap}.ornamen{display:inline-flex;flex:0 1 2.8em;min-width:1.1em;align-items:center;opacity:.72}
+.ornamen svg{width:100%;height:auto;fill:none;stroke:currentColor;stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round}
+.ornamen-kiri{transform:scaleX(-1)}
+.variasi-aktif .warna-judul-3{background:var(--latar-judul)}.variasi-aktif .warna-isi-2{background:var(--latar-isi-2)}.variasi-aktif .warna-isi-1{background:var(--latar-isi-1)}
+.teks-tebal .bait,.teks-tebal .judul{font-weight:700}
+.garis-petak .petak{outline:1px solid #00A6C7;outline-offset:-1px}
+.status,.error{padding:24px 12px;text-align:center;font:15px/1.6 system-ui,sans-serif}.error{color:#a32626}
+@media(max-width:600px){:root{--font-dasar:clamp(1rem,4.1vw,1.35rem)}.bait{column-gap:.2em;line-height:calc(1.55 + var(--jarak-baris))}.judul{gap:.2em;justify-content:center;text-align:center}.ornamen{flex-basis:1.8em}}
+
+.petak-acuan{position:absolute;z-index:2;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);border:1px dashed #16a34a;pointer-events:none}
+
+
+
+.status-kalibrasi{display:grid;grid-template-columns:auto auto;align-items:center;gap:8px;margin:8px;font:12px/1.4 system-ui,sans-serif}
+.tombol-autofit,.tombol-lock{border:1px solid var(--garis-kontrol);border-radius:6px;padding:6px 12px;background:var(--latar-kontrol);color:var(--warna-kontrol);font:700 12px system-ui,sans-serif;cursor:pointer}
+.tombol-autofit{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
+.tombol-lock[aria-pressed="true"]{background:#166534;color:#fff;border-color:#166534}
+.tombol-autofit:disabled,.tombol-lock:disabled{opacity:.45;cursor:not-allowed}
+.panel-nilai-kalibrasi{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:7px}
+.nilai-kalibrasi{padding:5px 9px;border:1px solid var(--garis-kontrol);border-radius:5px;background:var(--latar-kontrol);color:var(--warna-kontrol);font:600 12px/1.3 ui-monospace,monospace}
+.nilai-faktor{background:#e8f5e9;border-color:#86b98b;color:#14532d}
+.status-lock{grid-column:1/-1;color:var(--warna-kontrol);opacity:.85;min-height:1.4em}
+
+
+
+/* Paket 5-3: Panel kembali ke posisi asal; kontrol AUTOFIT tampil di Panel. */
+#panelKendali > .status-kalibrasi{
+  display:flex!important;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:6px;
+  margin:4px 0;
+  font:inherit;
+}
+#panelKendali > .status-kalibrasi .tombol-autofit,
+#panelKendali > .status-kalibrasi .tombol-lock{
+  min-height:0;
+  padding:3px 7px;
+  border-radius:5px;
+  font:inherit;
+  line-height:1.2;
+}
+
+/* Paket 5-5: alur lengkap kalibrasi di sidebar; Panel hanya tombol AUTOFIT. */
+.kalibrasi-sidebar-kontrol{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin:0 0 14px}
+.kalibrasi-sidebar-judul{font-size:13px;font-weight:700;color:var(--warna-kontrol)}
+.tombol-kalibrasi-tahap{width:100%;min-height:36px;padding:8px 12px;border:1px solid #1d4ed8;border-radius:6px;background:#1d4ed8;color:#fff;font:700 13px system-ui,sans-serif;cursor:pointer}
+.tombol-kalibrasi-tahap[data-tahap="lock"]{background:#166534;border-color:#166534}
+.tombol-kalibrasi-tahap[data-tahap="simpan"]{background:#a16207;border-color:#a16207}
+.tombol-kalibrasi-tahap:disabled{opacity:.5;cursor:not-allowed}
+.kalibrasi-info{display:grid;gap:0;border:1px solid var(--garis-kontrol);border-radius:6px;overflow:hidden;background:var(--latar-kontrol);color:var(--warna-kontrol);font:12px/1.45 system-ui,sans-serif}
+.kalibrasi-info-baris{display:grid;grid-template-columns:minmax(95px,.85fr) minmax(0,1.15fr);gap:8px;padding:7px 9px;border-bottom:1px solid var(--garis-kontrol)}
+.kalibrasi-info-baris:last-child{border-bottom:0}
+.kalibrasi-info-label{opacity:.72}
+.kalibrasi-info-value{min-width:0;text-align:right;overflow-wrap:anywhere;font-weight:600}
+.kalibrasi-status{font-weight:400}
+.kalibrasi-pin-label{display:flex;align-items:center;gap:7px;font:12px system-ui,sans-serif;color:var(--warna-kontrol)}
+.kalibrasi-pin{margin:0}
+.tombol-autofit-panel{flex:0 0 auto;width:auto;min-height:0;margin:0;padding:3px 7px;border:1px solid #1d4ed8;border-radius:5px;background:#1d4ed8;color:#fff;font:inherit;font-size:inherit;line-height:1.2;cursor:pointer}
+.tombol-autofit-panel[hidden]{display:none!important}
+
+/* 5-6: skala slider disamakan dengan halaman bait. */
+.pembungkus-petak{overflow:visible}
+.petak{transform-origin:top center}
