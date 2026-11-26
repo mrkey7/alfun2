@@ -471,13 +471,6 @@ body:not(.alfiyyah-sidebar-open) #alfiyyahSidebarFlyout {
   width:100%;
   box-sizing:border-box;
 }
-.panel-always-on-top-placeholder{
-  display:block;
-  flex:0 0 auto;
-  width:100%;
-  visibility:hidden;
-  pointer-events:none;
-}
 
 /* Menu ikut keluar dari stacking context stage dan ditempatkan di atas panel. */
 #alfiyyahMenuBlock.menu-always-on-top{
